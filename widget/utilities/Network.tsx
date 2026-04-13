@@ -4,6 +4,7 @@ import NM from "gi://NM?version=1.0"
 import GLib from "gi://GLib"
 
 const client = new NM.Client()
+client.init(null)
 const nmState = createBinding(client, "state")
 
 export default function NetworkWidget() {
