@@ -84,6 +84,13 @@ window.Bar {
      }
    }
 
+   power-button {
+     background: none;
+     border: none;
+     box-shadow: none;
+     padding: 0 4px;
+   }
+
    tray {
      tray-item {
        background: none;
@@ -108,5 +115,36 @@ window.Bar {
      }
    }
 
+}
+
+window.PowerMenu {
+  background: transparent;
+
+  power-menu {
+    background: rgba(30, 30, 46, 0.95);
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 200px;
+
+    power-menu-btn {
+      border-radius: 8px;
+      padding: 10px 16px;
+      background: none;
+      border: none;
+      box-shadow: none;
+
+      power-menu-icon {
+        font-size: 18px;
+      }
+
+      power-menu-label {
+        font-size: 14px;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
 }
 
