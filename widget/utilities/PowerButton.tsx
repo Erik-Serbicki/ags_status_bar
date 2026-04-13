@@ -28,32 +28,30 @@ const menuWindow = (
     anchor={TOP | BOTTOM | LEFT | RIGHT}
     application={app}
     $={(self: Astal.Window) => {
+      // Close on Escape key.
       const key = new Gtk.EventControllerKey()
       key.connect("key-pressed", (_: Gtk.EventControllerKey, keyval: number) => {
         if (keyval === Gdk.KEY_Escape) close()
         return false
       })
       self.add_controller(key)
+
+      // Close when clicking anywhere on the backdrop (the full-screen window).
+      // The inner menu box claims its own clicks so they don't bubble here.
+      const click = new Gtk.GestureClick()
+      click.connect("pressed", close)
+      self.add_controller(click)
     }}
   >
-    <box
-      halign={Gtk.Align.CENTER}
-      valign={Gtk.Align.CENTER}
-      $={(self: Gtk.Box) => {
-        // Clicks that reach this box (i.e. outside the menu card) close the menu.
-        const click = new Gtk.GestureClick()
-        click.connect("pressed", close)
-        self.add_controller(click)
-      }}
-    >
+    <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
       <box
         cssName="power-menu"
         orientation={1}
         spacing={8}
         $={(self: Gtk.Box) => {
-          // Stop click propagation so inner clicks don't reach the backdrop.
+          // Claim all clicks on the menu card so they don't reach the window.
           const click = new Gtk.GestureClick()
-          click.connect("pressed", (_: Gtk.GestureClick, _n: number, x: number, y: number) => {
+          click.connect("pressed", () => {
             click.set_state(Gtk.EventSequenceState.CLAIMED)
           })
           self.add_controller(click)
@@ -84,7 +82,7 @@ const menuWindow = (
 
 export default function PowerButton() {
   return (
-    <button cssName="power-button" onClicked={() => setOpen(true)}>
+    <button cssName="power-button" onClicked={() => setOpen((v) => !v)}>
       <label cssName="power-icon" label="󰐥" />
     </button>
   )
