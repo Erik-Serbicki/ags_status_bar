@@ -4,6 +4,7 @@ import Workspaces from "./desktop/Workspaces"
 import Clock from "./calendar/Clock"
 import Calendar from "./calendar/Calendar"
 import SystemTray from "./utilities/Tray"
+import BatteryWidget from "./utilities/Battery"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
@@ -28,6 +29,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         </box>
         <box $type="end" >
             <SystemTray />
+            <BatteryWidget />
         </box>
       </centerbox>
     </window>
