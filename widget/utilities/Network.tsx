@@ -6,17 +6,16 @@ import GLib from "gi://GLib"
 const client = new NM.Client()
 const nmState = createBinding(client, "state")
 
-const connected = createComputed(() => {
-  const s = nmState()
-  return (
-    s === NM.State.CONNECTED_GLOBAL ||
-    s === NM.State.CONNECTED_SITE ||
-    s === NM.State.CONNECTED_LOCAL
-  )
-})
-
 export default function NetworkWidget() {
-  const icon = createComputed(() => connected() ? "󰤨" : "󰤭")
+  const icon = createComputed(() => {
+    switch (nmState()) {
+        case NM.State.CONNECTED_GLOBAL: return "󰤨"
+        case NM.State.CONNECTED_SITE:   return "󰤩"
+        case NM.State.CONNECTED_LOCAL:  return "󱛎"
+        case NM.State.CONNECTING:       return "󰤨"
+        default:                        return "󰤭"
+    }
+})
   const statusText = createComputed(() => {
     switch (nmState()) {
       case NM.State.CONNECTED_GLOBAL: return "Connected"
