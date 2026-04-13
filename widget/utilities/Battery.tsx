@@ -42,8 +42,8 @@ export default function BatteryWidget() {
 
   return (
     <box class={cssClass} orientation={0} spacing={4}>
-      <label cssName="battery-icon" label={icon} />
       <label cssName="battery-percent" label={createComputed(() => `${percent()}%`)} />
+      <label cssName="battery-icon" label={icon} />
     </box>
   )
 }

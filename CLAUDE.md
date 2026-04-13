@@ -40,3 +40,6 @@ Bar (layer-shell window, anchored top)
 **GObject/GTK libraries** are imported via GIR: `import Hyprland from "gi://AstalHyprland"`, `import Tray from "gi://AstalTray"`, etc. Type stubs live in `@girs/`.
 
 **Styling** is a single `style.scss` file. CSS names on widgets use `cssName` (maps to GTK's widget name, targeted with unclassed selectors like `clock { }`) or `class` (targeted with `.class`).
+
+## Git management
+After completing any code change task, always create a git commit. Commit messages should be short, lowercase imperative style (e.g. "add battery widget", "fix workspace scroll"). Do not push to GitHub — the user pushes manually and will ask if needed.
