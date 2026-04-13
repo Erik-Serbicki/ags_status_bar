@@ -1,7 +1,9 @@
 window.Bar {
   background: transparent;
-  font-weight: bold;
-  font-family: "Iosevka Term", monospace;
+  *{
+    font-size: 14px;
+    font-family: "Iosevka Term Nerd Font", monospace;
+  }
 
   > centerbox {
     background: transparent;
@@ -13,29 +15,83 @@ window.Bar {
     border-radius: 100%;
     margin: 2px;
   }
+  
+  workspaces{
+    workspace-label{
 
-  .workspace-btn {
-    // Placeholder — replace with real styles later
-    background: none;
-    border: none;
-    box-shadow: none;
-    padding: 0;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.1);
     }
+    .workspace-btn {
+      // Placeholder — replace with real styles later
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      opacity: 0.5;
 
-    &.active {
-      color: red;
-    }
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
 
-    &.occupied:not(.active) {
-      color: blue;
-    }
+      &.active {
+        opacity: 1;
+      }
 
-    &.urgent {
-      color: orange;
+      &.occupied:not(.active) {
+        opacity: 0.7;
+      }
+
+      &.urgent {
+        color: orange;
+        opacity: 1;
+      }
     }
   }
+
+  clock{
+    clock-icon{
+      margin-right: 2px;
+    }
+  }
+
+  
+   calendar {
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+
+     calendar-icon {
+       margin-right: 6px;
+     }
+
+     calendar-date {
+       // date text styles
+     }
+   }
+
+   tray {
+     tray-item {
+       background: none;
+       border: none;
+       box-shadow: none;
+       padding: 0;
+
+       &:hover {
+         background: none;
+       }
+     }
+
+     tray-toggle {
+       background: none;
+       border: none;
+       box-shadow: none;
+       padding: 0;
+
+       &:hover {
+         background: none;
+       }
+     }
+   }
+
 }
 
