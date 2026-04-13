@@ -1,20 +1,41 @@
-// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-$fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
-
 window.Bar {
   background: transparent;
-  color: $fg-color;
   font-weight: bold;
+  font-family: "Iosevka Term", monospace;
 
   > centerbox {
-    background: $bg-color;
+    background: transparent;
     border-radius: 10px;
-    margin: 8px;
+    margin: 4px;
   }
 
   button {
-    border-radius: 8px;
+    border-radius: 100%;
     margin: 2px;
   }
+
+  .workspace-btn {
+    // Placeholder — replace with real styles later
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.active {
+      color: red;
+    }
+
+    &.occupied:not(.active) {
+      color: blue;
+    }
+
+    &.urgent {
+      color: orange;
+    }
+  }
 }
+
