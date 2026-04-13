@@ -1,22 +1,60 @@
 import { createBinding, createComputed, createState, For } from "ags"
 import { Gtk } from "ags/gtk4"
 import Tray from "gi://AstalTray"
+import Gio from "gi://Gio"
 
 const tray = Tray.get_default()
 
 function TrayItem({ item }: { item: Tray.TrayItem }) {
   const menuModel = createBinding(item, "menuModel")
   const gicon = createBinding(item, "gicon")
+
+  function showContextMenu(widget: Gtk.Widget) {
+    const model = menuModel()
+    let popover: Gtk.PopoverMenu
+
+    if (model) {
+      popover = Gtk.PopoverMenu.new_from_model(model)
+    } else {
+      const appName = item.title || "App"
+
+      const menu = new Gio.Menu()
+
+      const nameSection = new Gio.Menu()
+      nameSection.append(appName, "tray.noop")
+      menu.append_section(null, nameSection)
+
+      const actionsSection = new Gio.Menu()
+      actionsSection.append("Quit", "tray.quit")
+      menu.append_section(null, actionsSection)
+
+      popover = Gtk.PopoverMenu.new_from_model(menu)
+
+      const group = new Gio.SimpleActionGroup()
+
+      const noop = new Gio.SimpleAction({ name: "noop", enabled: false })
+      group.add_action(noop)
+
+      const quit = new Gio.SimpleAction({ name: "quit" })
+      quit.connect("activate", () => item.activate(0, 0))
+      group.add_action(quit)
+
+      widget.insert_action_group("tray", group)
+    }
+
+    popover.set_parent(widget)
+    popover.popup()
+  }
+
   return (
     <button
       cssName="tray-item"
-      onClicked={(self) => {
-        if (menuModel()) {
-          const menu = Gtk.Menu.new_from_model(menuModel()!)
-          menu.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)
-        } else {
-          item.activate(0, 0)
-        }
+      onClicked={() => item.activate(0, 0)}
+      $={(self) => {
+        const gesture = new Gtk.GestureClick()
+        gesture.set_button(3)
+        gesture.connect("pressed", () => showContextMenu(self))
+        self.add_controller(gesture)
       }}
     >
       <image
