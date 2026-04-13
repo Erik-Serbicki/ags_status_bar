@@ -4,21 +4,26 @@ import NM from "gi://NM?version=1.0"
 import GLib from "gi://GLib"
 
 const client = new NM.Client()
-const connectivity = createBinding(client, "connectivity")
+const nmState = createBinding(client, "state")
 
 const connected = createComputed(() => {
-  const state = connectivity()
-  return state === NM.ConnectivityState.FULL || state === NM.ConnectivityState.LIMITED
+  const s = nmState()
+  return (
+    s === NM.State.CONNECTED_GLOBAL ||
+    s === NM.State.CONNECTED_SITE ||
+    s === NM.State.CONNECTED_LOCAL
+  )
 })
 
 export default function NetworkWidget() {
   const icon = createComputed(() => connected() ? "󰤨" : "󰤭")
   const statusText = createComputed(() => {
-    switch (connectivity()) {
-      case NM.ConnectivityState.FULL:    return "Connected"
-      case NM.ConnectivityState.LIMITED: return "Limited connectivity"
-      case NM.ConnectivityState.PORTAL:  return "Captive portal"
-      default:                           return "Disconnected"
+    switch (nmState()) {
+      case NM.State.CONNECTED_GLOBAL: return "Connected"
+      case NM.State.CONNECTED_SITE:   return "Connected (limited)"
+      case NM.State.CONNECTED_LOCAL:  return "Local only"
+      case NM.State.CONNECTING:       return "Connecting..."
+      default:                        return "Disconnected"
     }
   })
 
