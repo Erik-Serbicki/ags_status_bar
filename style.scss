@@ -84,6 +84,17 @@ window.Bar {
      }
    }
 
+   network-button {
+     background: none;
+     border: none;
+     box-shadow: none;
+     padding: 0 4px;
+
+     network-icon {
+       font-size: 16px;
+     }
+   }
+
    power-button {
      background: none;
      border: none;
@@ -148,3 +159,33 @@ window.PowerMenu {
   }
 }
 
+network-menu {
+  padding: 12px;
+  min-width: 180px;
+
+  network-status {
+    font-size: 11px;
+    opacity: 0.6;
+    padding-bottom: 4px;
+  }
+
+  network-menu-btn {
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    box-shadow: none;
+
+    network-menu-icon {
+      font-size: 16px;
+    }
+
+    network-menu-label {
+      font-size: 13px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
