@@ -37,7 +37,6 @@ const menuWindow = (
       self.add_controller(key)
 
       // Close when clicking anywhere on the backdrop (the full-screen window).
-      // The inner menu box claims its own clicks so they don't bubble here.
       const click = new Gtk.GestureClick()
       click.connect("pressed", close)
       self.add_controller(click)
@@ -48,14 +47,6 @@ const menuWindow = (
         cssName="power-menu"
         orientation={1}
         spacing={8}
-        $={(self: Gtk.Box) => {
-          // Claim all clicks on the menu card so they don't reach the window.
-          const click = new Gtk.GestureClick()
-          click.connect("pressed", () => {
-            click.set_state(Gtk.EventSequenceState.CLAIMED)
-          })
-          self.add_controller(click)
-        }}
       >
         <button cssName="power-menu-btn" onClicked={() => run("systemctl suspend")}>
           <box spacing={10}>
