@@ -47,6 +47,13 @@ const menuWindow = (
         cssName="power-menu"
         orientation={1}
         spacing={8}
+        $={(self: Gtk.Widget) => {
+          const blocker = new Gtk.GestureClick()
+          blocker.connect("pressed", () => {
+            blocker.set_sequence_state(null, Gtk.EventSequenceState.CLAIMED)
+          })
+          self.add_controller(blocker)
+        }}
       >
         <button cssName="power-menu-btn" onClicked={() => run("systemctl suspend")}>
           <box spacing={10}>
