@@ -5,6 +5,7 @@ import Clock from "./calendar/Clock"
 import Calendar from "./calendar/Calendar"
 import SystemTray from "./utilities/Tray"
 import NetworkWidget from "./utilities/Network"
+import AudioWidget from "./utilities/Audio"
 import BatteryWidget from "./utilities/Battery"
 import PowerButton from "./utilities/PowerButton"
 
@@ -31,6 +32,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         </box>
         <box $type="end" >
             <SystemTray />
+            <AudioWidget />
             <NetworkWidget />
             <BatteryWidget />
             <PowerButton />
