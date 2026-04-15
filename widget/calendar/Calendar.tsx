@@ -1,4 +1,5 @@
 import { createPoll } from "ags/time"
+import { Gtk } from "ags/gtk4"
 import GLib from "gi://GLib"
 
 // --- Icon config — comment out the icon line in CalendarDisplay to hide it ---
@@ -19,5 +20,18 @@ export default function Calendar() {
     return GLib.DateTime.new_now_local().format("%a, %B %e") ?? ""
   })
 
-  return <CalendarDisplay date={date} />
+  return (
+    <button
+      cssName="calendar-button"
+      $={(self: Gtk.Button) => {
+        const cal = new Gtk.Calendar()
+        const popover = new Gtk.Popover()
+        popover.set_child(cal)
+        popover.set_parent(self)
+        self.connect("clicked", () => popover.popup())
+      }}
+    >
+      <CalendarDisplay date={date} />
+    </button>
+  )
 }
