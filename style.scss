@@ -243,6 +243,22 @@ clock-popover {
   }
 }
 
+window.NotificationPopups {
+  background: transparent;
+
+  notification-popup-list { }
+
+  notification-popup {
+    notification-popup-header {
+      notification-popup-icon { }
+      notification-popup-app-name { }
+      notification-popup-close { }
+    }
+    notification-popup-summary { }
+    notification-popup-body { }
+  }
+}
+
 window.QuickSettings {
   background: transparent;
 
@@ -268,6 +284,24 @@ window.QuickSettings {
 
     qs-brightness-icon {
       font-size: 18px;
+    }
+
+    notifications-header {
+      notifications-clear-btn { }
+    }
+
+    notifications-empty { }
+
+    notification-list {
+      notification-item {
+        notification-item-header {
+          notification-item-icon { }
+          notification-item-app-name { }
+          notification-item-dismiss { }
+        }
+        notification-item-summary { }
+        notification-item-body { }
+      }
     }
   }
 }

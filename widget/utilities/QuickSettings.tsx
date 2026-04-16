@@ -3,6 +3,7 @@ import { Gtk, Astal, Gdk } from "ags/gtk4"
 import app from "ags/gtk4/app"
 import GLib from "gi://GLib"
 import AstalIO from "gi://AstalIO?version=0.1"
+import { NotificationsSection } from "../notifications/NotificationList"
 
 // ── Open/close state ──────────────────────────────────────────────────────────
 const [open, setOpen] = createState(false)
@@ -137,34 +138,37 @@ function BrightnessSection() {
   )
 }
 
-// ── Panel window (created once at module load) ────────────────────────────────
+// ── Panel window (created inside main() via setupQuickSettings to provide reactive scope for For) ──
 const { TOP, BOTTOM, RIGHT } = Astal.WindowAnchor
 
-const panelWindow = (
-  <window
-    name="quick-settings"
-    class="QuickSettings"
-    visible={open}
-    layer={Astal.Layer.OVERLAY}
-    exclusivity={Astal.Exclusivity.IGNORE}
-    keymode={Astal.Keymode.ON_DEMAND}
-    anchor={TOP | BOTTOM | RIGHT}
-    application={app}
-    $={(self: Astal.Window) => {
-      const key = new Gtk.EventControllerKey()
-      key.connect("key-pressed", (_: Gtk.EventControllerKey, keyval: number) => {
-        if (keyval === Gdk.KEY_Escape) close()
-        return false
-      })
-      self.add_controller(key)
-    }}
-  >
-    <box cssName="qs-panel" orientation={1} spacing={16} valign={Gtk.Align.FILL}>
-      <VolumeSection />
-      <BrightnessSection />
-    </box>
-  </window>
-) as Astal.Window
+export function setupQuickSettings() {
+  ;(
+    <window
+      name="quick-settings"
+      class="QuickSettings"
+      visible={open}
+      layer={Astal.Layer.OVERLAY}
+      exclusivity={Astal.Exclusivity.IGNORE}
+      keymode={Astal.Keymode.ON_DEMAND}
+      anchor={TOP | BOTTOM | RIGHT}
+      application={app}
+      $={(self: Astal.Window) => {
+        const key = new Gtk.EventControllerKey()
+        key.connect("key-pressed", (_: Gtk.EventControllerKey, keyval: number) => {
+          if (keyval === Gdk.KEY_Escape) close()
+          return false
+        })
+        self.add_controller(key)
+      }}
+    >
+      <box cssName="qs-panel" orientation={1} spacing={16} valign={Gtk.Align.FILL}>
+        <NotificationsSection />
+        <VolumeSection />
+        <BrightnessSection />
+      </box>
+    </window>
+  ) as Astal.Window
+}
 
 export function SettingsButton() {
   return (
