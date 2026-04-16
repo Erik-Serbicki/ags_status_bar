@@ -3,12 +3,34 @@ import { Gtk, Astal, Gdk } from "ags/gtk4"
 import app from "ags/gtk4/app"
 import Gio from "gi://Gio"
 import GioUnix from "gi://GioUnix?version=2.0"
+import GLib from "gi://GLib"
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface AppEntry {
   id: string
   name: string
   icon: Gio.Icon | null
+}
+
+// ── Usage persistence ─────────────────────────────────────────────────────────
+const DATA_DIR = GLib.get_user_data_dir() + "/status-bar"
+const USAGE_FILE = DATA_DIR + "/app-usage.json"
+
+function loadUsage(): Record<string, number> {
+  try {
+    const [ok, bytes] = GLib.file_get_contents(USAGE_FILE)
+    if (!ok) return {}
+    return JSON.parse(new TextDecoder().decode(bytes)) as Record<string, number>
+  } catch {
+    return {}
+  }
+}
+
+function saveUsage(usage: Record<string, number>): void {
+  try {
+    GLib.mkdir_with_parents(DATA_DIR, 0o755)
+    GLib.file_set_contents(USAGE_FILE, JSON.stringify(usage))
+  } catch {}
 }
 
 // ── App helpers ───────────────────────────────────────────────────────────────
@@ -20,8 +42,19 @@ const allApps: AppEntry[] = (Gio.app_info_get_all() as Gio.AppInfo[])
   })
   .sort((a, b) => a.name.localeCompare(b.name))
 
+let usageCounts: Record<string, number> = loadUsage()
+
+function getDefaultApps(): AppEntry[] {
+  return [...allApps]
+    .sort((a, b) => {
+      const diff = (usageCounts[b.id] ?? 0) - (usageCounts[a.id] ?? 0)
+      return diff !== 0 ? diff : a.name.localeCompare(b.name)
+    })
+    .slice(0, 10)
+}
+
 function searchApps(query: string): AppEntry[] {
-  if (!query.trim()) return allApps.slice(0, 8)
+  if (!query.trim()) return getDefaultApps()
   return (GioUnix.DesktopAppInfo.search(query) as string[][])
     .flat()
     .flatMap((id) => {
@@ -34,7 +67,7 @@ function searchApps(query: string): AppEntry[] {
 
 // ── Module state ──────────────────────────────────────────────────────────────
 const [open, setOpen] = createState(false)
-const [entries, setEntries] = createState<AppEntry[]>(allApps.slice(0, 8))
+const [entries, setEntries] = createState<AppEntry[]>(getDefaultApps())
 const [selectedIndex, setSelectedIndex] = createState(-1)
 
 let entryWidget: Gtk.Entry | null = null
@@ -49,7 +82,7 @@ function close() {
 
 function reset() {
   setSelectedIndex(-1)
-  setEntries(allApps.slice(0, 8))
+  setEntries(getDefaultApps())
   entryWidget?.set_text("")
 }
 
@@ -61,6 +94,8 @@ function onQuery(q: string) {
 function launchEntry(entry: AppEntry) {
   const info = GioUnix.DesktopAppInfo.new(entry.id)
   if (info) info.launch([], null)
+  usageCounts[entry.id] = (usageCounts[entry.id] ?? 0) + 1
+  saveUsage(usageCounts)
   close()
   reset()
 }
