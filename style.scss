@@ -232,6 +232,31 @@ clock-popover {
   }
 }
 
+window.QuickSettings {
+  background: transparent;
+
+  qs-panel {
+    background: rgba(30, 30, 46, 0.95);
+    border-radius: 12px 0 0 12px;
+    padding: 20px 16px;
+    min-width: 280px;
+
+    qs-section {
+      // container per future section
+    }
+
+    qs-section-title {
+      font-size: 11px;
+      opacity: 0.5;
+      font-weight: bold;
+    }
+
+    qs-volume-icon {
+      font-size: 18px;
+    }
+  }
+}
+
 network-menu {
   padding: 12px;
   min-width: 180px;

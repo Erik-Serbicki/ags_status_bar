@@ -1,5 +1,6 @@
 import { createPoll } from "ags/time"
 import AstalIO from "gi://AstalIO?version=0.1"
+import { toggleQuickSettings } from "./QuickSettings"
 
 function getMuteState(): boolean {
   try {
@@ -17,6 +18,7 @@ export default function AudioWidget() {
     <button
       cssName="audio-button"
       class={muted((m) => (m ? "audio muted" : "audio"))}
+      onClicked={toggleQuickSettings}
     >
       <label cssName="audio-icon" label={muted((m) => (m ? "󰝟" : "󰕾"))} />
     </button>
