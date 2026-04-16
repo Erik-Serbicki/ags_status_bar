@@ -99,6 +99,11 @@ function AppItem({ entry }: { entry: AppEntry }) {
 const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor
 
 export function setupRunMenu() {
+  const display = Gdk.Display.get_default()
+  const monitor = display?.get_monitors().get_item(0) as Gdk.Monitor | null
+  const geometry = monitor?.get_geometry()
+  const menuWidth = geometry ? Math.round(geometry.width * 0.3) : 576
+
   ;(
     <window
       name="run-menu"
@@ -127,7 +132,7 @@ export function setupRunMenu() {
         })
       }}
     >
-      <box class="run-menu" halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER} orientation={1} spacing={8}>
+      <box class="run-menu" halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER} orientation={1} spacing={8} widthRequest={menuWidth}>
         <entry
           class="run-menu-input"
           placeholderText="Search apps..."
