@@ -95,54 +95,54 @@ function AppItem({ entry }: { entry: AppEntry }) {
   )
 }
 
-// ── Window ────────────────────────────────────────────────────────────────────
+// ── Window (created inside main() via setupRunMenu to provide a reactive scope for For) ──
 const { TOP, BOTTOM, LEFT, RIGHT } = Astal.WindowAnchor
 
-const runMenuWindow = (
-  <window
-    name="run-menu"
-    class="RunMenu"
-    visible={open}
-    layer={Astal.Layer.OVERLAY}
-    exclusivity={Astal.Exclusivity.IGNORE}
-    keymode={Astal.Keymode.ON_DEMAND}
-    anchor={TOP | BOTTOM | LEFT | RIGHT}
-    application={app}
-    $={(self: Astal.Window) => {
-      const key = new Gtk.EventControllerKey()
-      key.connect("key-pressed", (_: Gtk.EventControllerKey, keyval: number) => {
-        if (keyval === Gdk.KEY_Escape) { close(); reset(); return true }
-        if (keyval === Gdk.KEY_Return || keyval === Gdk.KEY_KP_Enter) { launchSelected(); return true }
-        if (keyval === Gdk.KEY_Down) { moveSelection(1); return true }
-        if (keyval === Gdk.KEY_Up) { moveSelection(-1); return true }
-        return false
-      })
-      self.add_controller(key)
+export function setupRunMenu() {
+  ;(
+    <window
+      name="run-menu"
+      class="RunMenu"
+      visible={open}
+      layer={Astal.Layer.OVERLAY}
+      exclusivity={Astal.Exclusivity.IGNORE}
+      keymode={Astal.Keymode.ON_DEMAND}
+      anchor={TOP | BOTTOM | LEFT | RIGHT}
+      application={app}
+      $={(self: Astal.Window) => {
+        const key = new Gtk.EventControllerKey()
+        key.connect("key-pressed", (_: Gtk.EventControllerKey, keyval: number) => {
+          if (keyval === Gdk.KEY_Escape) { close(); reset(); return true }
+          if (keyval === Gdk.KEY_Return || keyval === Gdk.KEY_KP_Enter) { launchSelected(); return true }
+          if (keyval === Gdk.KEY_Down) { moveSelection(1); return true }
+          if (keyval === Gdk.KEY_Up) { moveSelection(-1); return true }
+          return false
+        })
+        self.add_controller(key)
 
-      // Focus the entry and reset state each time the menu opens
-      self.connect("notify::visible", () => {
-        if (self.visible) entryWidget?.grab_focus()
-        else reset()
-      })
-    }}
-  >
-    <box class="run-menu" halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER} orientation={1} spacing={8}>
-      <entry
-        class="run-menu-input"
-        placeholderText="Search apps..."
-        hexpand={true}
-        $={(self: Gtk.Entry) => {
-          entryWidget = self
-          self.connect("changed", () => onQuery(self.get_text()))
-        }}
-      />
-      <box class="run-menu-results" orientation={1} spacing={2}>
-        <For each={entries}>
-          {(entry) => <AppItem entry={entry} />}
-        </For>
+        // Focus the entry and reset state each time the menu opens
+        self.connect("notify::visible", () => {
+          if (self.visible) entryWidget?.grab_focus()
+          else reset()
+        })
+      }}
+    >
+      <box class="run-menu" halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER} orientation={1} spacing={8}>
+        <entry
+          class="run-menu-input"
+          placeholderText="Search apps..."
+          hexpand={true}
+          $={(self: Gtk.Entry) => {
+            entryWidget = self
+            self.connect("changed", () => onQuery(self.get_text()))
+          }}
+        />
+        <box class="run-menu-results" orientation={1} spacing={2}>
+          <For each={entries}>
+            {(entry) => <AppItem entry={entry} />}
+          </For>
+        </box>
       </box>
-    </box>
-  </window>
-) as Astal.Window
-
-export default runMenuWindow
+    </window>
+  ) as Astal.Window
+}
