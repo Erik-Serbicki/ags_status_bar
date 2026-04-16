@@ -249,6 +249,10 @@ window.NotificationPopups {
   notification-popup-list { }
 
   notification-popup {
+    background: rgba(30, 30, 46, 0.8);
+    border-radius: 8px;
+    padding: 10px 12px;
+
     notification-popup-header {
       notification-popup-icon { }
       notification-popup-app-name { }
@@ -294,6 +298,10 @@ window.QuickSettings {
 
     notification-list {
       notification-item {
+        background: rgba(30, 30, 46, 0.8);
+        border-radius: 8px;
+        padding: 8px 10px;
+
         notification-item-header {
           notification-item-icon { }
           notification-item-app-name { }
