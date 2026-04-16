@@ -53,6 +53,13 @@ window.Bar {
     }
   }
 
+  clock-button {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
   
    calendar-button {
      background: none;
@@ -177,6 +184,50 @@ window.PowerMenu {
       &:hover {
         background: rgba(255, 255, 255, 0.1);
       }
+    }
+  }
+}
+
+clock-popover {
+  padding: 12px;
+  min-width: 220px;
+
+  stackswitcher {
+    margin-bottom: 4px;
+  }
+
+  timer-tab,
+  alarm-tab {
+    padding-top: 4px;
+  }
+
+  timer-entry,
+  alarm-entry {
+    border-radius: 6px;
+    padding: 4px 8px;
+  }
+
+  timer-countdown {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 4px 0;
+  }
+
+  timer-status,
+  alarm-status {
+    font-size: 11px;
+    opacity: 0.6;
+  }
+
+  timer-btn {
+    border-radius: 8px;
+    padding: 6px 12px;
+    background: none;
+    border: none;
+    box-shadow: none;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
   }
 }
