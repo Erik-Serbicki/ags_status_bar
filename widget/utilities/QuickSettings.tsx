@@ -26,6 +26,17 @@ function getVolume(): number {
   }
 }
 
+// ── Brightness helpers ────────────────────────────────────────────────────────
+function getBrightness(): number {
+  try {
+    const cur = parseInt(AstalIO.Process.exec("brightnessctl get").trim(), 10)
+    const max = parseInt(AstalIO.Process.exec("brightnessctl max").trim(), 10)
+    return max > 0 ? Math.round((cur / max) * 100) : 50
+  } catch {
+    return 50
+  }
+}
+
 // ── VolumeSection component ───────────────────────────────────────────────────
 function VolumeSection() {
   return (
@@ -76,6 +87,56 @@ function VolumeSection() {
   )
 }
 
+// ── BrightnessSection component ──────────────────────────────────────────────
+function BrightnessSection() {
+  return (
+    <box cssName="qs-section" orientation={1} spacing={6}>
+      <label cssName="qs-section-title" label="BRIGHTNESS" halign={Gtk.Align.START} />
+      <box orientation={0} spacing={8} hexpand={true}>
+        <label cssName="qs-brightness-icon" label="󰃞" />
+        <box
+          hexpand={true}
+          $={(self: Gtk.Box) => {
+            const adjustment = new Gtk.Adjustment({
+              value: getBrightness(),
+              lower: 0,
+              upper: 100,
+              step_increment: 1,
+              page_increment: 5,
+            })
+
+            const scale = new Gtk.Scale({
+              orientation: Gtk.Orientation.HORIZONTAL,
+              adjustment,
+              draw_value: true,
+              digits: 0,
+            })
+            scale.set_hexpand(true)
+            self.append(scale)
+
+            // Set system brightness when slider moves
+            adjustment.connect("value-changed", () => {
+              const val = Math.round(adjustment.get_value())
+              GLib.spawn_command_line_async(`brightnessctl set ${val}%`)
+            })
+
+            // Re-sync from system every 2 seconds (tolerance avoids fighting active drags)
+            const syncId = GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 2, () => {
+              const sysBright = getBrightness()
+              if (Math.abs(adjustment.get_value() - sysBright) > 3) {
+                adjustment.set_value(sysBright)
+              }
+              return true // SOURCE_CONTINUE
+            })
+
+            self.connect("destroy", () => GLib.source_remove(syncId))
+          }}
+        />
+      </box>
+    </box>
+  )
+}
+
 // ── Panel window (created once at module load) ────────────────────────────────
 const { TOP, BOTTOM, RIGHT } = Astal.WindowAnchor
 
@@ -100,6 +161,7 @@ const panelWindow = (
   >
     <box cssName="qs-panel" orientation={1} spacing={16} valign={Gtk.Align.FILL}>
       <VolumeSection />
+      <BrightnessSection />
     </box>
   </window>
 ) as Astal.Window
