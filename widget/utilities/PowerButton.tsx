@@ -37,9 +37,9 @@ const menuWindow = (
       self.add_controller(key)
 
       // Close when clicking anywhere on the backdrop (the full-screen window).
-      const click = new Gtk.GestureClick()
-      click.connect("pressed", close)
-      self.add_controller(click)
+      //const click = new Gtk.GestureClick()
+      //click.connect("pressed", close)
+      //self.add_controller(click)
     }}
   >
     <box halign={Gtk.Align.CENTER} valign={Gtk.Align.CENTER}>
@@ -47,13 +47,13 @@ const menuWindow = (
         cssName="power-menu"
         orientation={1}
         spacing={8}
-        $={(self: Gtk.Widget) => {
-          const blocker = new Gtk.GestureClick()
-          blocker.connect("pressed", () => {
-            blocker.set_sequence_state(null, Gtk.EventSequenceState.CLAIMED)
-          })
-          self.add_controller(blocker)
-        }}
+        //$={(self: Gtk.Widget) => {
+        //  const blocker = new Gtk.GestureClick()
+        //  blocker.connect("pressed", () => {
+        //    blocker.set_sequence_state(null, Gtk.EventSequenceState.CLAIMED)
+        //  })
+        //  self.add_controller(blocker)
+        //}}
       >
         <button cssName="power-menu-btn" onClicked={() => run("systemctl suspend")}>
           <box spacing={10}>
