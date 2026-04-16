@@ -8,10 +8,13 @@ app.start({
   main() {
     app.get_monitors().map(Bar)
   },
-  requestHandler(request, res) {
-    if (request === "toggle-quick-settings") {
+  requestHandler(argv, res) {
+    console.log("request received:", argv)
+    if (argv[0] === "toggle-quick-settings") {
       toggleQuickSettings()
       res("ok")
+    } else {
+      res(`unknown request: ${argv[0]}`)
     }
   },
 })
