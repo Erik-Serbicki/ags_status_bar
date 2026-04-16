@@ -153,9 +153,6 @@ export function setupRunMenu() {
         const key = new Gtk.EventControllerKey()
         key.connect("key-pressed", (_: Gtk.EventControllerKey, keyval: number) => {
           if (keyval === Gdk.KEY_Escape) { close(); reset(); return true }
-          if (keyval === Gdk.KEY_Return || keyval === Gdk.KEY_KP_Enter) { launchSelected(); return true }
-          if (keyval === Gdk.KEY_Down) { moveSelection(1); return true }
-          if (keyval === Gdk.KEY_Up) { moveSelection(-1); return true }
           return false
         })
         self.add_controller(key)
@@ -175,6 +172,15 @@ export function setupRunMenu() {
           $={(self: Gtk.Entry) => {
             entryWidget = self
             self.connect("changed", () => onQuery(self.get_text()))
+
+            const key = new Gtk.EventControllerKey()
+            key.connect("key-pressed", (_: Gtk.EventControllerKey, keyval: number) => {
+              if (keyval === Gdk.KEY_Return || keyval === Gdk.KEY_KP_Enter) { launchSelected(); return true }
+              if (keyval === Gdk.KEY_Down) { moveSelection(1); return true }
+              if (keyval === Gdk.KEY_Up) { moveSelection(-1); return true }
+              return false
+            })
+            self.add_controller(key)
           }}
         />
         <box class="run-menu-results" orientation={1} spacing={2}>
