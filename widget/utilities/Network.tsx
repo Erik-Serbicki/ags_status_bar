@@ -27,9 +27,14 @@ export default function NetworkWidget() {
     }
   })
 
+  const networkName = createComputed(() => {
+    return client.get_primary_connection()?.get_id() ?? ""
+  })
+
   const popoverChild = (
     <box cssName="network-menu" orientation={1} spacing={8}>
       <label cssName="network-status" label={statusText} halign={Gtk.Align.START} />
+      <label cssName="network-name" label={networkName} halign={Gtk.Align.START} visible={networkName((n) => n !== "")} />
       <button
         cssName="network-menu-btn"
         onClicked={() => GLib.spawn_command_line_async("nm-connection-editor")}
