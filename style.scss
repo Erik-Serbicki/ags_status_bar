@@ -124,6 +124,17 @@ window.Bar {
      }
    }
 
+   settings-button {
+     background: none;
+     border: none;
+     box-shadow: none;
+     padding: 0 4px;
+
+     settings-icon {
+       font-size: 16px;
+     }
+   }
+
    power-button {
      background: none;
      border: none;

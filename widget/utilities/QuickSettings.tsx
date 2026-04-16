@@ -104,7 +104,10 @@ const panelWindow = (
   </window>
 ) as Astal.Window
 
-// Module is imported for its side-effects (creates panelWindow); toggleQuickSettings is the primary export
-export default function QuickSettings() {
-  return <box />
+export function SettingsButton() {
+  return (
+    <button cssName="settings-button" onClicked={toggleQuickSettings}>
+      <label cssName="settings-icon" label="󰒓" />
+    </button>
+  )
 }

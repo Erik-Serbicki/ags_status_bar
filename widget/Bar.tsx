@@ -8,6 +8,7 @@ import NetworkWidget from "./utilities/Network"
 import AudioWidget from "./utilities/Audio"
 import BatteryWidget from "./utilities/Battery"
 import PowerButton from "./utilities/PowerButton"
+import { SettingsButton } from "./utilities/QuickSettings"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
@@ -35,6 +36,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             <AudioWidget />
             <NetworkWidget />
             <BatteryWidget />
+            <SettingsButton />
             <PowerButton />
         </box>
       </centerbox>
