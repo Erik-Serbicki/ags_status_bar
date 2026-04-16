@@ -17,6 +17,7 @@ export default function AudioWidget() {
     <button
       cssName="audio-button"
       class={muted((m) => (m ? "audio muted" : "audio"))}
+      onClicked={() => AstalIO.Process.exec("pactl set-sink-mute @DEFAULT_SINK@ toggle")}
     >
       <label cssName="audio-icon" label={muted((m) => (m ? "󰝟" : "󰕾"))} />
     </button>
