@@ -162,9 +162,9 @@ export function setupQuickSettings() {
       }}
     >
       <box cssName="qs-panel" orientation={1} spacing={16} valign={Gtk.Align.FILL}>
-        <NotificationsSection />
         <VolumeSection />
         <BrightnessSection />
+        <NotificationsSection />
       </box>
     </window>
   ) as Astal.Window
