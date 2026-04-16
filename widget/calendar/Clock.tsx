@@ -218,8 +218,7 @@ function buildClockPopover(): Gtk.Widget {
   const switcher = new Gtk.StackSwitcher()
   switcher.set_stack(stack)
 
-  const outer = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 8 })
-  outer.set_css_name("clock-popover")
+  const outer = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL, spacing: 8, cssName: "clock-popover" })
   outer.append(switcher)
   outer.append(stack)
   return outer
