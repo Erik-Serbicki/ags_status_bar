@@ -1,6 +1,6 @@
 import Notifd from "gi://AstalNotifd"
 import GLib from "gi://GLib"
-import { createState, For } from "ags"
+import { createState, createComputed, For } from "ags"
 import { Gtk, Astal } from "ags/gtk4"
 import app from "ags/gtk4/app"
 
@@ -12,7 +12,7 @@ notifd.connect("notified", (_: unknown, id: number) => {
   setToastIds((ids) => [...ids, id])
   GLib.timeout_add(GLib.PRIORITY_DEFAULT, 2000, () => {
     setToastIds((ids) => ids.filter((i) => i !== id))
-    return GLib.SOURCE_REMOVE
+    return false
   })
 })
 
@@ -23,11 +23,13 @@ notifd.connect("resolved", (_: unknown, id: number) => {
 const { TOP, RIGHT } = Astal.WindowAnchor
 
 export function setupNotificationPopups() {
+  const popupVisible = createComputed(() => toastIds().length > 0)
+
   ;(
     <window
       name="notification-popups"
       class="NotificationPopups"
-      visible={() => toastIds().length > 0}
+      visible={popupVisible}
       layer={Astal.Layer.OVERLAY}
       exclusivity={Astal.Exclusivity.IGNORE}
       keymode={Astal.Keymode.NONE}
