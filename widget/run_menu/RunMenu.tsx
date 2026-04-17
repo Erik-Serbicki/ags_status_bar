@@ -68,7 +68,7 @@ function searchApps(query: string): AppEntry[] {
 // ── Module state ──────────────────────────────────────────────────────────────
 const [open, setOpen] = createState(false)
 const [entries, setEntries] = createState<AppEntry[]>(getDefaultApps())
-const [selectedIndex, setSelectedIndex] = createState(-1)
+const [selectedIndex, setSelectedIndex] = createState(0)
 
 let entryWidget: Gtk.Entry | null = null
 
@@ -81,13 +81,13 @@ function close() {
 }
 
 function reset() {
-  setSelectedIndex(-1)
+  setSelectedIndex(0)
   setEntries(getDefaultApps())
   entryWidget?.set_text("")
 }
 
 function onQuery(q: string) {
-  setSelectedIndex(-1)
+  setSelectedIndex(0)
   setEntries(searchApps(q))
 }
 
