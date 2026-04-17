@@ -174,6 +174,7 @@ export function setupRunMenu() {
             self.connect("changed", () => onQuery(self.get_text()))
 
             const key = new Gtk.EventControllerKey()
+            key.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
             key.connect("key-pressed", (_: Gtk.EventControllerKey, keyval: number) => {
               if (keyval === Gdk.KEY_Return || keyval === Gdk.KEY_KP_Enter) { launchSelected(); return true }
               if (keyval === Gdk.KEY_Down) { moveSelection(1); return true }
