@@ -142,6 +142,21 @@ window.Bar {
      padding: 0 4px;
    }
 
+   cpu-widget {
+     background: none;
+     border: none;
+     box-shadow: none;
+     padding: 0 4px;
+
+     cpu-icon {
+       font-size: 14px;
+     }
+
+     &.high {
+       color: orange;
+     }
+   }
+
    tray {
      tray-item {
        background: none;

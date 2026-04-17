@@ -9,6 +9,7 @@ import AudioWidget from "./utilities/Audio"
 import BatteryWidget from "./utilities/Battery"
 import PowerButton from "./utilities/PowerButton"
 import { SettingsButton } from "./utilities/QuickSettings"
+import CpuWidget from "./utilities/Cpu"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor
@@ -32,6 +33,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             <Clock />
         </box>
         <box $type="end" >
+            <CpuWidget />
             <SystemTray />
             <AudioWidget />
             <NetworkWidget />
