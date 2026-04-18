@@ -314,6 +314,10 @@ window.QuickSettings {
 
     notifications-empty { }
 
+    notification-list-scroll {
+      border-radius: 6px;
+    }
+
     notification-list {
       notification-item {
         background: rgba(30, 30, 46, 0.8);
