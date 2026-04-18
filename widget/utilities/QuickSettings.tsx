@@ -142,11 +142,6 @@ function BrightnessSection() {
 const { TOP, BOTTOM, RIGHT } = Astal.WindowAnchor
 
 export function setupQuickSettings() {
-  const display = Gdk.Display.get_default()
-  const monitor = display?.get_monitors().get_item(0) as Gdk.Monitor | null
-  const geometry = monitor?.get_geometry()
-  const panelWidth = geometry ? Math.round(geometry.width * 0.2) : 384
-
   ;(
     <window
       name="quick-settings"
@@ -166,7 +161,7 @@ export function setupQuickSettings() {
         self.add_controller(key)
       }}
     >
-      <box cssName="qs-panel" orientation={1} spacing={16} valign={Gtk.Align.FILL} widthRequest={panelWidth}>
+      <box cssName="qs-panel" orientation={1} spacing={16} valign={Gtk.Align.FILL}>
         <VolumeSection />
         <BrightnessSection />
         <NotificationsSection />
