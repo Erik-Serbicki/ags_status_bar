@@ -1,0 +1,22 @@
+// ── Background & Surface ──────────────────────────────────────────────────────
+$bg:           #242424;   // base window background (mostly transparent in practice)
+$surface:      #2e2e2e;   // bar widget pill backgrounds
+$surface-alt:  #383838;   // panels/popovers (QuickSettings, PowerMenu, RunMenu)
+$surface-deep: #222222;   // items nested inside panels (notification-item, run-menu-item)
+
+// ── Foreground ────────────────────────────────────────────────────────────────
+$fg:           #ede8dc;            // eggshell white — primary text
+$fg-muted:     rgba(#ede8dc, 0.5); // dimmed labels (section titles, status text)
+
+// ── Accent: Oranges ───────────────────────────────────────────────────────────
+$primary:      #e8872a;   // main interactive orange (active workspace, focus)
+$secondary:    #c06820;   // deeper/muted orange (secondary actions)
+$highlight:    #ffaa55;   // light orange (hover glows, highlights)
+
+// ── State Colors ──────────────────────────────────────────────────────────────
+$warning:      #f5a020;   // yellow-orange — low battery, high CPU
+$alert:        #e04d2a;   // red-orange — urgent workspaces, critical alerts
+
+// ── Overlay Utilities ─────────────────────────────────────────────────────────
+$hover:        rgba(#ffaa55, 0.12);  // button hover state
+$border:       rgba(#e8872a, 0.18);  // subtle borders / separators

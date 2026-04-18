@@ -1,8 +1,11 @@
+@import 'theme';
+
 window.Bar {
   background: transparent;
   *{
     font-size: 14px;
     font-family: "Iosevka Term Nerd Font", monospace;
+    color: $fg;
   }
 
   > centerbox {
@@ -15,13 +18,16 @@ window.Bar {
     border-radius: 100%;
     margin: 2px;
   }
-  
+
   workspaces{
+    background: $surface;
+    border-radius: 8px;
+    padding: 2px 4px;
+
     workspace-label{
 
     }
     .workspace-btn {
-      // Placeholder — replace with real styles later
       background: none;
       border: none;
       box-shadow: none;
@@ -29,11 +35,12 @@ window.Bar {
       opacity: 0.5;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: $hover;
       }
 
       &.active {
         opacity: 1;
+        color: $primary;
       }
 
       &.occupied:not(.active) {
@@ -41,7 +48,7 @@ window.Bar {
       }
 
       &.urgent {
-        color: orange;
+        color: $alert;
         opacity: 1;
       }
     }
@@ -54,18 +61,20 @@ window.Bar {
   }
 
   clock-button {
-    background: none;
+    background: $surface;
+    border-radius: 8px;
     border: none;
     box-shadow: none;
-    padding: 0;
+    padding: 2px 8px;
   }
 
-  
+
    calendar-button {
-     background: none;
+     background: $surface;
+     border-radius: 8px;
      border: none;
      box-shadow: none;
-     padding: 0;
+     padding: 2px 8px;
    }
 
    calendar {
@@ -84,25 +93,27 @@ window.Bar {
    }
 
    .battery {
-     background: none;
+     background: $surface;
+     border-radius: 8px;
      border: none;
      box-shadow: none;
-     padding: 0 4px;
+     padding: 2px 6px;
 
      battery-icon {
        font-size: 16px;
      }
 
      &.low {
-       color: orange;
+       color: $warning;
      }
    }
 
    audio-button {
-     background: none;
+     background: $surface;
+     border-radius: 8px;
      border: none;
      box-shadow: none;
-     padding: 0 4px;
+     padding: 2px 6px;
 
      audio-icon {
        font-size: 16px;
@@ -114,10 +125,11 @@ window.Bar {
    }
 
    network-button {
-     background: none;
+     background: $surface;
+     border-radius: 8px;
      border: none;
      box-shadow: none;
-     padding: 0 4px;
+     padding: 2px 6px;
 
      network-icon {
        font-size: 16px;
@@ -125,10 +137,11 @@ window.Bar {
    }
 
    settings-button {
-     background: none;
+     background: $surface;
+     border-radius: 8px;
      border: none;
      box-shadow: none;
-     padding: 0 4px;
+     padding: 2px 6px;
 
      settings-icon {
        font-size: 16px;
@@ -136,28 +149,34 @@ window.Bar {
    }
 
    power-button {
-     background: none;
+     background: $surface;
+     border-radius: 8px;
      border: none;
      box-shadow: none;
-     padding: 0 4px;
+     padding: 2px 6px;
    }
 
    cpu-widget {
-     background: none;
+     background: $surface;
+     border-radius: 8px;
      border: none;
      box-shadow: none;
-     padding: 0 4px;
+     padding: 2px 6px;
 
      cpu-icon {
        font-size: 14px;
      }
 
      &.high {
-       color: orange;
+       color: $warning;
      }
    }
 
    tray {
+     background: $surface;
+     border-radius: 8px;
+     padding: 2px 4px;
+
      tray-item {
        background: none;
        border: none;
@@ -187,7 +206,7 @@ window.PowerMenu {
   background: transparent;
 
   power-menu {
-    background: rgba(30, 30, 46, 0.95);
+    background: $surface-alt;
     border-radius: 12px;
     padding: 16px;
     min-width: 200px;
@@ -208,7 +227,7 @@ window.PowerMenu {
       }
 
       &:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: $hover;
       }
     }
   }
@@ -242,7 +261,7 @@ clock-popover {
   timer-status,
   alarm-status {
     font-size: 11px;
-    opacity: 0.6;
+    color: $fg-muted;
   }
 
   timer-btn {
@@ -253,7 +272,7 @@ clock-popover {
     box-shadow: none;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: $hover;
     }
   }
 }
@@ -264,7 +283,7 @@ window.NotificationPopups {
   notification-popup-list { }
 
   notification-popup {
-    background: rgba(30, 30, 46, 0.8);
+    background: $surface-deep;
     border-radius: 8px;
     padding: 10px 12px;
 
@@ -282,18 +301,18 @@ window.QuickSettings {
   background: transparent;
 
   qs-panel {
-    background: rgba(30, 30, 46, 0.95);
+    background: $surface-alt;
     border-radius: 12px 0 0 12px;
     padding: 20px 16px;
     min-width: 300px;
 
     qs-section {
-      // container per future section
+      // container per section
     }
 
     qs-section-title {
       font-size: 11px;
-      opacity: 0.5;
+      color: $fg-muted;
       font-weight: bold;
     }
 
@@ -309,7 +328,9 @@ window.QuickSettings {
       notifications-clear-btn { }
     }
 
-    notifications-empty { }
+    notifications-empty {
+      color: $fg-muted;
+    }
 
     notification-list-scroll {
       border-radius: 6px;
@@ -317,7 +338,7 @@ window.QuickSettings {
 
     notification-list {
       notification-item {
-        background: rgba(30, 30, 46, 0.8);
+        background: $surface-deep;
         border-radius: 8px;
         padding: 8px 10px;
 
@@ -337,7 +358,7 @@ window.RunMenu {
   background: transparent;
 
   .run-menu {
-    background: rgb(30, 30, 46);
+    background: $surface-alt;
     border-radius: 12px;
     padding: 16px;
   }
@@ -355,7 +376,7 @@ window.RunMenu {
     box-shadow: none;
 
     &.selected {
-      background: rgba(255, 255, 255, 0.15);
+      background: $hover;
       border-radius: 6px;
     }
   }
@@ -373,7 +394,7 @@ network-menu {
 
   network-status {
     font-size: 11px;
-    opacity: 0.6;
+    color: $fg-muted;
   }
 
   network-name {
@@ -398,7 +419,7 @@ network-menu {
     }
 
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: $hover;
     }
   }
 }
