@@ -47,7 +47,7 @@ export function setupNotificationPopups() {
             return (
               <box cssName="notification-popup" orientation={1} spacing={4}>
                 <box cssName="notification-popup-header" orientation={0} spacing={8}>
-                  <image cssName="notification-popup-icon" iconName={n.appIcon} iconSize={Gtk.IconSize.NORMAL} />
+                  <image cssName="notification-popup-icon" iconName={n.appIcon || "dialog-information-symbolic"} iconSize={Gtk.IconSize.NORMAL} />
                   <label cssName="notification-popup-app-name" label={n.appName} hexpand={true} halign={Gtk.Align.START} ellipsize={Pango.EllipsizeMode.END} />
                   <button cssName="notification-popup-close" onClicked={() => n.dismiss()}>
                     <label label="✕" />

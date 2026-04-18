@@ -60,7 +60,7 @@ export function NotificationsSection() {
             {(n) => (
               <box cssName="notification-item" orientation={1} spacing={2}>
                 <box cssName="notification-item-header" orientation={0} spacing={8}>
-                  <image cssName="notification-item-icon" iconName={n.appIcon} iconSize={Gtk.IconSize.NORMAL} />
+                  <image cssName="notification-item-icon" iconName={n.appIcon || "dialog-information-symbolic"} iconSize={Gtk.IconSize.NORMAL} />
                   <label cssName="notification-item-app-name" label={n.appName} hexpand={true} halign={Gtk.Align.START} ellipsize={Pango.EllipsizeMode.END} />
                   <button cssName="notification-item-dismiss" onClicked={() => n.dismiss()}>
                     <label label="✕" />
