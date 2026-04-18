@@ -34,18 +34,15 @@ window.Bar {
       padding: 0;
       min-width: 28px;
       min-height: 28px;
-      opacity: 0.5;
 
       &:hover {
         background: $surface;
         color: $primary;
-        opacity: 1;
       }
 
       &.active {
         background: $surface;
-        color: $primary;
-        opacity: 1;
+        color: $accent;
       }
 
       &.occupied:not(.active) {
