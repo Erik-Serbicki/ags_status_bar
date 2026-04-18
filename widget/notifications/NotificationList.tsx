@@ -1,6 +1,7 @@
 import Notifd from "gi://AstalNotifd"
 import { createState, For } from "ags"
 import { Gtk } from "ags/gtk4"
+import Pango from "gi://Pango"
 
 const notifd = Notifd.get_default()
 const [notifications, setNotifications] = createState(notifd.get_notifications())
@@ -34,14 +35,14 @@ export function NotificationsSection() {
             <box cssName="notification-item" orientation={1} spacing={2}>
               <box cssName="notification-item-header" orientation={0} spacing={8}>
                 <image cssName="notification-item-icon" iconName={n.appIcon} iconSize={Gtk.IconSize.NORMAL} />
-                <label cssName="notification-item-app-name" label={n.appName} hexpand={true} halign={Gtk.Align.START} />
+                <label cssName="notification-item-app-name" label={n.appName} hexpand={true} halign={Gtk.Align.START} ellipsize={Pango.EllipsizeMode.END} />
                 <button cssName="notification-item-dismiss" onClicked={() => n.dismiss()}>
                   <label label="✕" />
                 </button>
               </box>
-              <label cssName="notification-item-summary" label={n.summary} halign={Gtk.Align.START} />
+              <label cssName="notification-item-summary" label={n.summary} halign={Gtk.Align.START} ellipsize={Pango.EllipsizeMode.END} />
               {n.body
-                ? <label cssName="notification-item-body" label={n.body} halign={Gtk.Align.START} wrap={true} />
+                ? <label cssName="notification-item-body" label={n.body} halign={Gtk.Align.START} wrap={true} maxWidthChars={40} />
                 : <box />}
             </box>
           )}

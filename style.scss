@@ -267,6 +267,8 @@ window.NotificationPopups {
     background: rgba(30, 30, 46, 0.8);
     border-radius: 8px;
     padding: 10px 12px;
+    max-width: 360px;
+    overflow: hidden;
 
     notification-popup-header {
       notification-popup-icon { }
@@ -317,6 +319,8 @@ window.QuickSettings {
         background: rgba(30, 30, 46, 0.8);
         border-radius: 8px;
         padding: 8px 10px;
+        max-width: 100%;
+        overflow: hidden;
 
         notification-item-header {
           notification-item-icon { }
