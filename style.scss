@@ -23,9 +23,6 @@ window.Bar {
     background: transparent;
     padding: 2px 4px;
 
-    workspace-label{
-
-    }
     .workspace-btn {
       background: $surface;
       border: none;
@@ -207,7 +204,7 @@ window.PowerMenu {
   background: transparent;
 
   power-menu {
-    background: $surface-alt;
+    background: $surface;
     border-radius: 12px;
     padding: 16px;
     min-width: 200px;
@@ -302,7 +299,7 @@ window.QuickSettings {
   background: transparent;
 
   qs-panel {
-    background: $surface-alt;
+    background: $surface;
     border-radius: 12px 0 0 12px;
     padding: 20px 16px;
     min-width: 300px;
@@ -359,7 +356,7 @@ window.RunMenu {
   background: transparent;
 
   .run-menu {
-    background: $surface-alt;
+    background: $surface;
     border-radius: 12px;
     padding: 16px;
   }
