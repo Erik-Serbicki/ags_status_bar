@@ -1,4 +1,5 @@
 import { createState } from "ags"
+import { createPoll } from "ags/time"
 import { Gtk, Astal, Gdk } from "ags/gtk4"
 import app from "ags/gtk4/app"
 import GLib from "gi://GLib"
@@ -17,6 +18,15 @@ function close() {
 }
 
 // ── Volume helpers ────────────────────────────────────────────────────────────
+function getMuteState(): boolean {
+  try {
+    const out = AstalIO.Process.exec("pactl get-sink-mute @DEFAULT_SINK@")
+    return out.trim().endsWith("yes")
+  } catch {
+    return false
+  }
+}
+
 function getVolume(): number {
   try {
     const out = AstalIO.Process.exec("pactl get-sink-volume @DEFAULT_SINK@")
@@ -40,11 +50,13 @@ function getBrightness(): number {
 
 // ── VolumeSection component ───────────────────────────────────────────────────
 function VolumeSection() {
+  const muted = createPoll(getMuteState(), 500, getMuteState)
+
   return (
     <box cssName="qs-section" orientation={1} spacing={6}>
       <label cssName="qs-section-title" label="VOLUME" halign={Gtk.Align.START} />
       <box orientation={0} spacing={8} hexpand={true}>
-        <label cssName="qs-volume-icon" label="󰕾" />
+        <label cssName="qs-volume-icon" label={muted((m) => (m ? "󰝟" : "󰕾"))} />
         <box
           hexpand={true}
           $={(self: Gtk.Box) => {
