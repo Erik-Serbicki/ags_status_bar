@@ -35,13 +35,25 @@ export function NotificationsSection() {
         visible={() => notifications().length === 0}
         halign={Gtk.Align.CENTER}
       />
-      <scrolledWindow
+      <box
         cssName="notification-list-scroll"
-        hscrollbarPolicy={Gtk.PolicyType.NEVER}
-        vscrollbarPolicy={Gtk.PolicyType.AUTOMATIC}
-        maxContentHeight={240}
-        propagateNaturalHeight={true}
         visible={() => notifications().length > 0}
+        $={(self: Gtk.Box) => {
+          const sw = new Gtk.ScrolledWindow({
+            hscrollbar_policy: Gtk.PolicyType.NEVER,
+            vscrollbar_policy: Gtk.PolicyType.AUTOMATIC,
+            max_content_height: 240,
+            propagate_natural_height: true,
+          })
+
+          // Reparent the notification-list box (first child) into the scroll window
+          const child = self.get_first_child()
+          if (child) {
+            self.remove(child)
+            sw.set_child(child)
+          }
+          self.append(sw)
+        }}
       >
         <box cssName="notification-list" orientation={1} spacing={4}>
           <For each={notifications}>
@@ -62,7 +74,7 @@ export function NotificationsSection() {
             )}
           </For>
         </box>
-      </scrolledWindow>
+      </box>
     </box>
   )
 }

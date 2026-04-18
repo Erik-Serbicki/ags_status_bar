@@ -267,8 +267,6 @@ window.NotificationPopups {
     background: rgba(30, 30, 46, 0.8);
     border-radius: 8px;
     padding: 10px 12px;
-    max-width: 360px;
-    overflow: hidden;
 
     notification-popup-header {
       notification-popup-icon { }
@@ -288,7 +286,6 @@ window.QuickSettings {
     border-radius: 12px 0 0 12px;
     padding: 20px 16px;
     min-width: 300px;
-    max-width: 300px;
 
     qs-section {
       // container per future section
@@ -323,8 +320,6 @@ window.QuickSettings {
         background: rgba(30, 30, 46, 0.8);
         border-radius: 8px;
         padding: 8px 10px;
-        max-width: 100%;
-        overflow: hidden;
 
         notification-item-header {
           notification-item-icon { }
