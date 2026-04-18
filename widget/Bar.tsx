@@ -8,7 +8,7 @@ import NetworkWidget from "./utilities/Network"
 import AudioWidget from "./utilities/Audio"
 import BatteryWidget from "./utilities/Battery"
 import PowerButton from "./utilities/PowerButton"
-import { SettingsButton } from "./utilities/QuickSettings"
+import { SettingsButton, isQuickSettingsOpen } from "./utilities/QuickSettings"
 import CpuWidget from "./utilities/Cpu"
 
 export default function Bar(gdkmonitor: Gdk.Monitor) {
@@ -32,13 +32,13 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             <Calendar />
             <Clock />
         </box>
-        <box $type="end" >
+        <box $type="end" marginEnd={isQuickSettingsOpen((v) => v ? 300 : 0)}>
             <CpuWidget />
             <SystemTray />
             <AudioWidget />
             <NetworkWidget />
             <BatteryWidget />
-            <SettingsButton />
+            {/* <SettingsButton />*/} 
             <PowerButton />
         </box>
       </centerbox>

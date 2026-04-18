@@ -8,6 +8,7 @@ import { NotificationsSection } from "../notifications/NotificationList"
 
 // ── Open/close state ──────────────────────────────────────────────────────────
 const [open, setOpen] = createState(false)
+export const isQuickSettingsOpen = open
 
 export function toggleQuickSettings() {
   setOpen((v) => !v)
