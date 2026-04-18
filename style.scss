@@ -20,27 +20,32 @@ window.Bar {
   }
 
   workspaces{
-    background: $surface;
-    border-radius: 8px;
+    background: transparent;
     padding: 2px 4px;
 
     workspace-label{
 
     }
     .workspace-btn {
-      background: none;
+      background: $surface;
       border: none;
       box-shadow: none;
+      border-radius: 100%;
       padding: 0;
+      min-width: 28px;
+      min-height: 28px;
       opacity: 0.5;
 
       &:hover {
-        background: $hover;
+        background: $surface;
+        color: $primary;
+        opacity: 1;
       }
 
       &.active {
-        opacity: 1;
+        background: $surface;
         color: $primary;
+        opacity: 1;
       }
 
       &.occupied:not(.active) {
