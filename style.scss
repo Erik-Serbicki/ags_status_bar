@@ -25,7 +25,7 @@ window.Bar {
 
     .workspace-btn {
       background: $surface;
-      border: none;
+      border: 1px solid currentColor;
       box-shadow: none;
       border-radius: 100%;
       padding: 0;
@@ -34,11 +34,13 @@ window.Bar {
 
       &:hover {
         background: $surface;
+        color: $primary;
         workspace-label { color: $primary; }
       }
 
       &.active {
         background: $surface;
+        color: $accent;
         workspace-label { color: $accent; }
       }
 
@@ -47,6 +49,7 @@ window.Bar {
       }
 
       &.urgent {
+        color: $alert;
         workspace-label { color: $alert; }
       }
     }
@@ -61,7 +64,7 @@ window.Bar {
   clock-button {
     background: $surface;
     border-radius: 20px;
-    border: none;
+    border: 1px solid currentColor;
     box-shadow: none;
     padding: 2px 8px;
   }
@@ -70,7 +73,7 @@ window.Bar {
    calendar-button {
      background: $surface;
      border-radius: 20px;
-     border: none;
+     border: 1px solid currentColor;
      box-shadow: none;
      padding: 2px 8px;
    }
@@ -93,7 +96,7 @@ window.Bar {
    .battery {
      background: $surface;
      border-radius: 20px;
-     border: none;
+     border: 1px solid currentColor;
      box-shadow: none;
      padding: 2px 6px;
 
@@ -103,13 +106,14 @@ window.Bar {
 
      &.low {
        color: $warning;
+       battery-icon { color: $warning; }
      }
    }
 
    audio-button {
      background: $surface;
      border-radius: 20px;
-     border: none;
+     border: 1px solid currentColor;
      box-shadow: none;
      padding: 2px 6px;
 
@@ -125,7 +129,7 @@ window.Bar {
    network-button {
      background: $surface;
      border-radius: 20px;
-     border: none;
+     border: 1px solid currentColor;
      box-shadow: none;
      padding: 2px 6px;
 
@@ -137,7 +141,7 @@ window.Bar {
    settings-button {
      background: $surface;
      border-radius: 20px;
-     border: none;
+     border: 1px solid currentColor;
      box-shadow: none;
      padding: 2px 6px;
 
@@ -149,7 +153,7 @@ window.Bar {
    power-button {
      background: $surface;
      border-radius: 20px;
-     border: none;
+     border: 1px solid currentColor;
      box-shadow: none;
      padding: 2px 6px;
    }
@@ -157,7 +161,7 @@ window.Bar {
    cpu-widget {
      background: $surface;
      border-radius: 20px;
-     border: none;
+     border: 1px solid currentColor;
      box-shadow: none;
      padding: 2px 6px;
 
@@ -167,12 +171,14 @@ window.Bar {
 
      &.high {
        color: $warning;
+       cpu-icon { color: $warning; }
      }
    }
 
    tray {
      background: $surface;
      border-radius: 20px;
+     border: 1px solid currentColor;
      padding: 2px 4px;
 
      tray-item {
