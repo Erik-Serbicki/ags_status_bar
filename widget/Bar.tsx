@@ -22,6 +22,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}
+      marginRight={isQuickSettingsOpen((v) => v ? 300 : 0)}
       application={app}
     >
       <centerbox cssName="centerbox">
@@ -32,7 +33,7 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
             <Calendar />
             <Clock />
         </box>
-        <box $type="end" marginEnd={isQuickSettingsOpen((v) => v ? 300 : 0)}>
+        <box $type="end">
             <CpuWidget />
             <SystemTray />
             <AudioWidget />
