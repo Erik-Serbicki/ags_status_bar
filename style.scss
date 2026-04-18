@@ -25,7 +25,7 @@ window.Bar {
 
     .workspace-btn {
       background: $surface;
-      border: 1px solid alpha(currentColor, 0.7);
+      border: 1px solid unquote("alpha(currentColor, 0.7)");
       box-shadow: none;
       border-radius: 100%;
       padding: 0;
@@ -64,7 +64,7 @@ window.Bar {
   clock-button {
     background: $surface;
     border-radius: 20px;
-    border: 1px solid alpha(currentColor, 0.7);
+    border: 1px solid unquote("alpha(currentColor, 0.7)");
     box-shadow: none;
     padding: 2px 8px;
   }
@@ -73,7 +73,7 @@ window.Bar {
    calendar-button {
      background: $surface;
      border-radius: 20px;
-     border: 1px solid alpha(currentColor, 0.7);
+     border: 1px solid unquote("alpha(currentColor, 0.7)");
      box-shadow: none;
      padding: 2px 8px;
    }
@@ -96,7 +96,7 @@ window.Bar {
    .battery {
      background: $surface;
      border-radius: 20px;
-     border: 1px solid alpha(currentColor, 0.7);
+     border: 1px solid unquote("alpha(currentColor, 0.7)");
      box-shadow: none;
      padding: 2px 6px;
 
@@ -113,7 +113,7 @@ window.Bar {
    audio-button {
      background: $surface;
      border-radius: 20px;
-     border: 1px solid alpha(currentColor, 0.7);
+     border: 1px solid unquote("alpha(currentColor, 0.7)");
      box-shadow: none;
      padding: 2px 6px;
 
@@ -129,7 +129,7 @@ window.Bar {
    network-button {
      background: $surface;
      border-radius: 20px;
-     border: 1px solid alpha(currentColor, 0.7);
+     border: 1px solid unquote("alpha(currentColor, 0.7)");
      box-shadow: none;
      padding: 2px 6px;
 
@@ -141,7 +141,7 @@ window.Bar {
    settings-button {
      background: $surface;
      border-radius: 20px;
-     border: 1px solid alpha(currentColor, 0.7);
+     border: 1px solid unquote("alpha(currentColor, 0.7)");
      box-shadow: none;
      padding: 2px 6px;
 
@@ -153,7 +153,7 @@ window.Bar {
    power-button {
      background: $surface;
      border-radius: 20px;
-     border: 1px solid alpha(currentColor, 0.7);
+     border: 1px solid unquote("alpha(currentColor, 0.7)");
      box-shadow: none;
      padding: 2px 6px;
    }
@@ -161,7 +161,7 @@ window.Bar {
    cpu-widget {
      background: $surface;
      border-radius: 20px;
-     border: 1px solid alpha(currentColor, 0.7);
+     border: 1px solid unquote("alpha(currentColor, 0.7)");
      box-shadow: none;
      padding: 2px 6px;
 
@@ -178,7 +178,7 @@ window.Bar {
    tray {
      background: $surface;
      border-radius: 20px;
-     border: 1px solid alpha(currentColor, 0.7);
+     border: 1px solid unquote("alpha(currentColor, 0.7)");
      padding: 2px 4px;
 
      tray-item {
