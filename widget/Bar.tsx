@@ -29,11 +29,11 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         <box $type="start">
             <Workspaces />
         </box>
-        <box $type="center" spacing={12}>
+        <box $type="center" spacing={8}>
             <Calendar />
             <Clock />
         </box>
-        <box $type="end" spacing={2}>
+        <box $type="end" spacing={4}>
             <CpuWidget />
             <SystemTray />
             <AudioWidget />

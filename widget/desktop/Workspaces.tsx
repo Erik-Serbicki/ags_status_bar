@@ -59,7 +59,7 @@ export default function Workspaces() {
     <box
       cssName="workspaces"
       orientation={0}
-      spacing={4}
+      spacing={0}
       $={(self) => {
         const scroll = new Gtk.EventControllerScroll()
         scroll.set_flags(Gtk.EventControllerScrollFlags.VERTICAL)
